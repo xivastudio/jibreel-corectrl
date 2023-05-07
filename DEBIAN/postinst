@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Debug
-exec 2> >(tee -a /var/log/corectrl-install.log)
-exec 1>&2
+LOG_FILE=/var/log/corectrl-$(date +%Y-%m-%d_%H-%M).log
+exec > >(tee -a ${LOG_FILE}) 2>&1
 
 # Usuário atual
 currentuser=$(who | awk '{ print $1 }' | head -n 1)
@@ -11,11 +11,11 @@ currentuser=$(who | awk '{ print $1 }' | head -n 1)
 if [[ ! -d /home/$currentuser/.config/autostart ]]
 then
 	mkdir -p /home/$currentuser/.config/autostart
-	cp /usr/share/applications/org.corectrl.corectrl.desktop /home/$currentuser/.config/autostart/org.corectrl.corectrl.desktop
+	cp -R -v /usr/share/applications/org.corectrl.corectrl.desktop /home/$currentuser/.config/autostart/
 	chown $currentuser:$currentuser /home/$currentuser/.config/autostart
 	chown $currentuser:$currentuser /home/$currentuser/.config/autostart/org.corectrl.corectrl.desktop
 else
-	cp /usr/share/applications/org.corectrl.corectrl.desktop /home/$currentuser/.config/autostart/org.corectrl.corectrl.desktop
+	cp -R -v /usr/share/applications/org.corectrl.corectrl.desktop /home/$currentuser/.config/autostart/
 	chown $currentuser:$currentuser /home/$currentuser/.config/autostart/org.corectrl.corectrl.desktop
 fi
 
