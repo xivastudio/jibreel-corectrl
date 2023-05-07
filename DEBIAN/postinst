@@ -8,7 +8,7 @@ exec 1>&2
 currentuser=$(who | awk '{ print $1 }' | head -n 1)
 
 # Pasta autostart
-autostartfolder="$currentuser/.config/autostart"
+autostartfolder="/home/$currentuser/.config/autostart"
 
 # Checa se a pasta /home/.config/autostart existe
 if [ -d $autostart ]; then
@@ -24,7 +24,9 @@ else
 fi
 
 # Copia as configurações do CoreCtrl
+mkdir -p /home/$currentuser/.config/corectrl
 cp -R -v /tmp/corectrl/corectrl.ini /home/$currentuser/.config/corectrl/
+mkdir -p /home/$currentuser/.config/corectrl/profiles
 cp -R -v /tmp/corectrl/_global_.ccpro /home/$currentuser/.config/corectrl/profiles/
 
 # Altera as permissões
