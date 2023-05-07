@@ -7,21 +7,19 @@ exec 1>&2
 # Usuário atual
 currentuser=$(who | awk '{ print $1 }' | head -n 1)
 
-# Pasta autostart
-autostartfolder="/home/$currentuser/.config/autostart"
-
-# Checa se a pasta /home/.config/autostart existe
-if [ -d $autostart ]; then
-	# Se sim, copia o .desktop para o autostart
-	cp /usr/share/applications/org.corectrl.corectrl.desktop $autostartfolder/org.corectrl.corectrl.desktop
-	chown $currentuser:$currentuser $autostartfolder/org.corectrl.corectrl.desktop
+# Inicia o CoreCtrl na inicialização
+if [[ ! -d /home/$currentuser/.config/autostart ]]
+then
+	mkdir -p /home/$currentuser/.config/autostart
+	cp /usr/share/applications/org.corectrl.corectrl.desktop /home/$currentuser/.config/autostart/org.corectrl.corectrl.desktop
+	chown $currentuser:$currentuser /home/$currentuser/.config/autostart
+	chown $currentuser:$currentuser /home/$currentuser/.config/autostart/org.corectrl.corectrl.desktop
 else
-	# Se não, cria a pasta e depois copia o .desktop
-	mkdir -p $autostartfolder
-	chown $currentuser:$currentuser $autostartfolder
-	cp /usr/share/applications/org.corectrl.corectrl.desktop $autostartfolder/org.corectrl.corectrl.desktop
-	chown $currentuser:$currentuser $autostartfolder/org.corectrl.corectrl.desktop
+	cp /usr/share/applications/org.corectrl.corectrl.desktop /home/$currentuser/.config/autostart/org.corectrl.corectrl.desktop
+	chown $currentuser:$currentuser /home/$currentuser/.config/autostart/org.corectrl.corectrl.desktop
 fi
+
+# Permissões
 
 # Copia as configurações do CoreCtrl
 mkdir -p /home/$currentuser/.config/corectrl
