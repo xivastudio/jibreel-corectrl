@@ -1,0 +1,5 @@
+[User permissions]
+Identity=unix-group:user
+Action=org.corectrl.*
+ResultActive=yes
+

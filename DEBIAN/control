@@ -1,0 +1,15 @@
+Package: corectrl
+Version: 1.4.0-0amiko1~22.04
+Architecture: amd64
+Maintainer: Jibreel al-Yahyah <jyahyah@email.com>
+Depends: libbotan-2-19 (>= 2.19.1+dfsg), libc6 (>= 2.34), libgcc-s1 (>= 3.3.1), libglib2.0-0 (>= 2.12.0), libpolkit-gobject-1-0 (>= 0.99), libqt5charts5 (>= 5.7.1), libqt5core5a (>= 5.15.1), libqt5dbus5 (>= 5.14.1), libqt5gui5 (>= 5.8.0) | libqt5gui5-gles (>= 5.8.0), libqt5network5 (>= 5.0.2), libqt5qml5 (>= 5.1.0), libqt5quick5 (>= 5.0.2) | libqt5quick5-gles (>= 5.0.2), libqt5widgets5 (>= 5.0.2), libquazip5-1 (>= 0.7.3), libstdc++6 (>= 11), qml-module-qtquick2, qml-module-qtquick-controls2, qml-module-qtquick-layouts, qml-module-qtquick-window2, qml-module-qt-labs-platform, qml-module-qtcharts, sysvinit-utils, util-linux, hwdata, mesa-utils, vulkan-tools | vulkan-utils
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://gitlab.com/corectrl/corectrl
+Description: Controle de hardware (CPU e GPU)
+ CoreCtrl é uma aplicação grátis e de código aberto que
+ permite você controlar com facilidade seu hardware usando
+ perfis de aplicação. Ele é flexível, confortável e
+ acessível para usuários comuns.
+ Por Juan Palacios: https://www.patreon.com/jpalaciosdev
