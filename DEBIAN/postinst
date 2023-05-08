@@ -15,21 +15,25 @@ then
 	chown $currentuser:$currentuser /home/$currentuser/.config/autostart
 	chown $currentuser:$currentuser /home/$currentuser/.config/autostart/org.corectrl.corectrl.desktop
 else
-	cp -R -v /usr/share/applications/org.corectrl.corectrl.desktop /home/$currentuser/.config/autostart/
-	chown $currentuser:$currentuser /home/$currentuser/.config/autostart/org.corectrl.corectrl.desktop
+	if [[ ! -f /home/$currentuser/.config/autostart/org.corectrl.corectrl.desktop ]]; then
+		cp -R -v /usr/share/applications/org.corectrl.corectrl.desktop /home/$currentuser/.config/autostart/
+		chown $currentuser:$currentuser /home/$currentuser/.config/autostart/org.corectrl.corectrl.desktop
+	fi
 fi
 
-# Permissões
-
 # Copia as configurações do CoreCtrl
-mkdir -p /home/$currentuser/.config/corectrl
-cp -R -v /tmp/corectrl/corectrl.ini /home/$currentuser/.config/corectrl/
-mkdir -p /home/$currentuser/.config/corectrl/profiles
-cp -R -v /tmp/corectrl/_global_.ccpro /home/$currentuser/.config/corectrl/profiles/
-
-# Altera as permissões
-chown -R $currentuser:$currentuser /home/$currentuser/.config/corectrl
-chown -R $currentuser:$currentuser /home/$currentuser/.config/corectrl/profiles
+if [[ ! -d /home/$currentuser/.config/corectrl ]]
+then
+	mkdir -p /home/$currentuser/.config/corectrl
+	chown -R $currentuser:$currentuser /home/$currentuser/.config/corectrl
+	cp -R -v /tmp/corectrl/corectrl.ini /home/$currentuser/.config/corectrl/
+	chown $currentuser:$currentuser /home/$currentuser/.config/corectrl/corectrl.ini
+else
+	if [[ ! -f /home/$currentuser/.config/corectrl.ini ]]; then
+		cp -R -v /tmp/corectrl/corectrl.ini /home/$currentuser/.config/corectrl/
+		chown $currentuser:$currentuser /home/$currentuser/.config/corectrl/corectrl.ini
+	fi
+fi
 
 # Não vai perguntar a senha de root
 sed -i 's/user/'$currentuser'/' /etc/polkit-1/localauthority/50-local.d/90-corectrl.pkla
